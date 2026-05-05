@@ -45,12 +45,7 @@ janesha_project/
         Images/                    # Raw images (excluded)
         Semi-automatic-annotations/ # (excluded if large)
         *.mat, *.txt, *.m         # Smaller annotation files
-  Literature Survey/
-    *.pdf                            # Papers used for the literature survey
-  Portable Glaucoma Prototype - Technical Documentation.html
-  download.jpg, images.jpg, *.pdf, *.zip, *.h5  # Additional project assets
-
-  DualSenseX-Setup/                # Not included in this GitHub push (per your request)
+ 
 ```
 
 ## Large files (Git LFS)
