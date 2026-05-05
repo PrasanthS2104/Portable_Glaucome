@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portable Glaucoma Prototype - Technical Documentation</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            padding: 40px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2c3e50;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header h2 {
+            color: #34495e;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .block-diagram {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .block {
+            background: white;
+            border: 3px solid #3498db;
+            border-radius: 8px;
+            padding: 15px 25px;
+            min-width: 280px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .block.camera {
+            border-color: #e74c3c;
+            background: #ffe5e5;
+        }
+        
+        .block.laptop {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        
+        .block.arduino {
+            border-color: #00979d;
+            background: #e0f7f8;
+        }
+        
+        .block.lcd {
+            border-color: #27ae60;
+            background: #e8f8f5;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #7f8c8d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .arrow-label {
+            font-size: 12px;
+            color: #95a5a6;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        .component-details {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        
+        .component-details h4 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .component-details p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .component-details ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        
+        .component-details li {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .specs-table th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .specs-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .specs-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .highlight-box strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card h5 {
+            color: #3498db;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .print-btn:hover {
+            background: #2980b9;
+        }
+        
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">📄 Print / Save as PDF</button>
+    
+    <div class="header">
+        <h1>PORTABLE GLAUCOMA DETECTION PROTOTYPE</h1>
+        <h2>Computer Vision-Based CDR Analysis System</h2>
+        <p>Technical Block Diagram &amp; System Architecture Documentation</p>
+    </div>
+    
+    <div class="section">
+        <h3 class="section-title">1. PROJECT OVERVIEW</h3>
+        <p style="margin-bottom: 15px;">
+            The Portable Glaucoma Detection Prototype is a cost-effective, non-invasive diagnostic system designed for early-stage glaucoma screening. This system leverages computer vision techniques and machine learning to analyze the Cup-to-Disc Ratio (CDR) from fundus images captured via a macro-enabled USB camera. The processed results are displayed on an external LCD screen, making it suitable for deployment in resource-constrained healthcare settings, rural clinics, and mobile health camps.
+        </p>
+        
+        <div class="highlight-box">
+            <strong>Key Innovation:</strong>
+            Unlike traditional fundoscopy equipment costing thousands of dollars, this prototype uses readily available components (webcam, laptop, Arduino, LCD) to provide preliminary glaucoma risk assessment at a fraction of the cost, with potential for real-time screening during mass health drives.
+        </div>
+    </div>
+    
+    <div class="section">
+        <h3 class="section-title">2. SYSTEM BLOCK DIAGRAM</h3>
+        
+        <div class="block-diagram">
+            <div class="diagram-container">
+                <div class="block camera">
+                    📷 MACRO CAMERA / USB WEBCAM<br>
+                    <small>Image Acquisition Module</small>
+                </div>
+                
+                <div class="arrow">
+                    ↓
+                    <span class="arrow-label">USB Video Stream (YUV/MJPEG)</span>
+                </div>
+                
+                <div class="block laptop">
+                    💻 LAPTOP / PC<br>
+                    <small>Processing &amp; Analysis Unit</small>
+                </div>
+                
+                <div class="arrow">
+                    ↓
+                    <span class="arrow-label">Serial/USB Communication (9600-115200 baud)</span>
+                </div>
+                
+                <div class="block arduino">
+                    🔧 ARDUINO UNO / NANO<br>
+                    <small>Microcontroller Interface</small>
+                </div>
+                
+                <div class="arrow">
+                    ↓
+                    <span class="arrow-label">I2C/Serial Protocol (SDA/SCL)</span>
+                </div>
+                
+                <div class="block lcd">
+                    🖥️ LCD1602 DISPLAY<br>
+                    <small>Result Visualization Module</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h3 class="section-title">3. COMPONENT DESCRIPTIONS</h3>
+        
+        <div class="component-details">
+            <h4>3.1 Macro Camera / USB Webcam (Image Acquisition)</h4>
+            <p><strong>Function:</strong> Captures high-resolution close-up images of the patient's optic disc and retinal structures.</p>
+            <ul>
+                <li><strong>Hardware:</strong> Standard USB webcam with clip-on macro lens (10x-60x magnification) or varifocal webcam with macro capability</li>
+                <li><strong>Resolution:</strong> Minimum 720p (1280×720), recommended 1080p for better CDR accuracy</li>
+                <li><strong>Interface:</strong> USB 2.0/3.0, UVC (USB Video Class) compliant for plug-and-play operation</li>
+                <li><strong>Output Format:</strong> MJPEG or YUV color space, accessible via OpenCV VideoCapture API</li>
+                <li><strong>Illumination:</strong> External LED ring light (optional) for consistent fundus imaging under varying ambient conditions</li>
+            </ul>
+        </div>
+        
+        <div class="component-details">
+            <h4>3.2 Laptop / PC (Central Processing Unit)</h4>
+            <p><strong>Function:</strong> Core computational unit executing image processing pipeline and CDR analysis algorithms.</p>
+            <ul>
+                <li><strong>Software Stack:</strong> Python 3.x with OpenCV, NumPy, scikit-image, and optional TensorFlow/PyTorch for ML models</li>
+                <li><strong>Processing Pipeline:</strong>
+                    <ol style="margin-left: 20px; margin-top: 5px;">
+                        <li>Frame capture from webcam (cv2.VideoCapture)</li>
+                        <li>Preprocessing: Grayscale conversion, histogram equalization, noise reduction</li>
+                        <li>Optic disc segmentation using circular Hough transform or U-Net</li>
+                        <li>Cup boundary detection via adaptive thresholding</li>
+                        <li>CDR calculation: CDR = Cup_Diameter / Disc_Diameter</li>
+                        <li>Classification: NORMAL (CDR&lt;0.3), SUSPECT (0.3-0.6), URGENT (&gt;0.6)</li>
+                    </ol>
+                </li>
+                <li><strong>Communication:</strong> Sends classification result as ASCII string via PySerial to Arduino</li>
+                <li><strong>Min. Specs:</strong> Intel i3 / AMD Ryzen 3, 4GB RAM, USB ports, Windows/Linux/macOS</li>
+            </ul>
+        </div>
+        
+        <div class="component-details">
+            <h4>3.3 Arduino Uno / Nano (Microcontroller)</h4>
+            <p><strong>Function:</strong> Receives diagnostic results from laptop and drives the LCD display module.</p>
+            <ul>
+                <li><strong>Microcontroller:</strong> ATmega328P (16 MHz, 5V logic)</li>
+                <li><strong>Serial Interface:</strong> Hardware UART on pins D0 (RX) and D1 (TX), configured at 9600 or 115200 baud</li>
+                <li><strong>I2C Interface:</strong> Pins A4 (SDA) and A5 (SCL) for LCD communication using I2C backpack</li>
+                <li><strong>Firmware Logic:</strong>
+                    <ol style="margin-left: 20px; margin-top: 5px;">
+                        <li>Listen on serial port for incoming result strings</li>
+                        <li>Parse received data (e.g., "NORMAL", "SUSPECT", "URGENT")</li>
+                        <li>Update LCD display with formatted text</li>
+                        <li>Optional: Drive LED indicators or buzzer for audio-visual alerts</li>
+                    </ol>
+                </li>
+                <li><strong>Libraries Used:</strong> LiquidCrystal_I2C.h or LiquidCrystal.h (depending on LCD interface)</li>
+            </ul>
+        </div>
+        
+        <div class="component-details">
+            <h4>3.4 LCD1602 Display (Result Visualization)</h4>
+            <p><strong>Function:</strong> Provides immediate, human-readable output of glaucoma screening results.</p>
+            <ul>
+                <li><strong>Display Type:</strong> 16×2 character LCD with HD44780 controller (blue/green backlight)</li>
+                <li><strong>Interface Options:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li><strong>I2C Mode (Recommended):</strong> Uses PCF8574 I2C backpack, requires only 4 connections (VCC, GND, SDA, SCL)</li>
+                        <li><strong>Parallel Mode:</strong> 6-pin mode (RS, EN, D4-D7) for direct Arduino connection</li>
+                    </ul>
+                </li>
+                <li><strong>Typical Output Format:</strong>
+                    <pre style="background: #2c3e50; color: #ecf0f1; padding: 10px; margin-top: 8px; border-radius: 4px;">Line 1: Status: NORMAL
+Line 2: CDR: 0.25
+                    </pre>
+                </li>
+                <li><strong>Power Requirements:</strong> 5V DC, ~2mA (backlight off), ~20mA (backlight on)</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+    <div class="section">
+        <h3 class="section-title">4. DATA FLOW &amp; PROTOCOL</h3>
+        
+        <div class="component-details">
+            <h4> End-to-End Data Pipeline</h4>
+            <ol style="margin-left: 20px; color: #555;">
+                <li><strong>Image Capture:</strong> Webcam streams video frames to laptop via USB (30-60 fps)</li>
+                <li><strong>Frame Extraction:</strong> Python script captures single frame using cv2.VideoCapture.read()</li>
+                <li><strong>Preprocessing:</strong> Contrast enhancement, bilateral filtering, ROI extraction</li>
+                <li><strong>Segmentation:</strong> Detect optic disc (largest circular feature) and cup (darker central region)</li>
+                <li><strong>CDR Calculation:</strong> Measure diameters using contour detection, compute ratio</li>
+                <li><strong>Classification:</strong> Apply threshold-based decision tree or trained ML model</li>
+                <li><strong>Serial Transmission:</strong> Send 8-byte ASCII string (e.g., "NORMAL\n") via PySerial</li>
+                <li><strong>Arduino Processing:</strong> Parse string, update LCD with formatted output</li>
+                <li><strong>Display Update:</strong> LCD shows result within 100ms of receiving data</li>
+            </ol>
+        </div>
+        
+        
+    </div>
+    
+    
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

@@ -1,0 +1,25 @@
+# Python / Streamlit
+__pycache__/
+.venv/
+.env
+.streamlit/
+*.pyc
+*.pyo
+*.pyd
+
+# OS junk
+Thumbs.db
+Desktop.ini
+
+# Streamlit logs
+*.log
+
+# Large raw image datasets (excluded to keep the repo pushable)
+Glaucoma_Detection/ACRIMA/Images/
+Glaucoma_Detection/Dataset/Fundus_Scanes_Sorted/
+Glaucoma_Detection/ORIGA/ORIGA/Images/
+Glaucoma_Detection/ORIGA/ORIGA/Semi-automatic-annotations/
+
+# Not needed for the glaucoma detector demo
+DualSenseX-Setup/
+
